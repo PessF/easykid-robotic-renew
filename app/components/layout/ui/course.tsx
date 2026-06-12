@@ -12,7 +12,7 @@ const courses = [
     color: "bg-blue-500",
     lightColor: "bg-blue-50",
     textColor: "text-blue-600",
-    image: "/pictures/course/kids-level/cover.jpg",
+    image: "/pictures/course/kids-course/IMG_8257-768x575.jpg",
     features: [
       { label: "Computer Skills", items: [] },
       { label: "Unplugged Coding", items: [] },
@@ -31,7 +31,7 @@ const courses = [
     color: "bg-emerald-500",
     lightColor: "bg-emerald-50",
     textColor: "text-emerald-600",
-    image: "/pictures/course/juniors-level/cover.jpg",
+    image: "/pictures/course/juniors-course/IMG_0718-scaled.jpg",
     features: [
       {
         label: "Programming Language",
@@ -51,7 +51,7 @@ const courses = [
     color: "bg-orange-500",
     lightColor: "bg-orange-50",
     textColor: "text-orange-600",
-    image: "/pictures/course/seniors-level/cover.jpg",
+    image: "/pictures/course/seniors-course/IMG_0720-768x576.jpg",
     features: [
       {
         label: "Advanced Languages",
@@ -75,7 +75,7 @@ const courses = [
     color: "bg-rose-500",
     lightColor: "bg-rose-50",
     textColor: "text-rose-600",
-    image: "/pictures/course/project-level/cover.jpg",
+    image: "/pictures/course/project-course/course_project_1-1536x1145.jpg",
     features: [
       {
         label: "Full Integration",

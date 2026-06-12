@@ -1,23 +1,51 @@
 "use client";
 
 import { LogoEs } from "@/app/components/layout/navbar/logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { smoothScrollTo } from "@/src/scroll";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface MenuItem {
   name: string;
+  nameTh: string;
   href: string;
   color: string;
-  isExternal?: boolean; // เครื่องหมาย ? หมายถึงจะมีหรือไม่มีก็ได้
+  isExternal?: boolean;
 }
 
 export const Navbar = () => {
-  // State สำหรับเก็บสถานะการเปิด/ปิด dropdown menu
   const [isOpen, setIsOpen] = useState(false);
-
+  const [activeSection, setActiveSection] = useState("home");
   const router = useRouter();
+  const pathname = usePathname();
+
+  // ตรวจจับ section ที่กำลังอยู่บนหน้า home
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const handleScroll = () => {
+      const sections = ["contact", "team", "courses", "about", "home"];
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom >= 160) {
+            setActiveSection(id);
+            return;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
+
+  const isActive = (item: MenuItem): boolean => {
+    if (item.href === "/moments-and-achievements") return pathname === "/moments-and-achievements";
+    if (item.href.startsWith("#")) return pathname === "/" && activeSection === item.href.slice(1);
+    return false;
+  };
 
   const handleNavigation = (item: MenuItem) => {
     setIsOpen(false);
@@ -35,20 +63,15 @@ export const Navbar = () => {
     }, 150);
   };
   // รายการเมนู (เก็บเป็น Array จะได้แก้ที่เดียวแล้วเปลี่ยนทั้งหมด)
-  const menuItems = [
-    { name: "Home", href: "#home", color: "#ef4444" },
-    { name: "Competition",href: "https://competition.easykidsrobotics.com/", color: "#8b5cf6", isExternal: true },
-    { name: "Courses", href: "#courses", color: "#f97316" },
-    { name: "Tutorials", href: "#tutorials", color: "#eab308" },
-    { name: "Our Team", href: "#team", color: "#22c55e" },
-    {
-      name: "Moments & Achievements",
-      href: "/moments-and-achievements",
-      color: "#ec4899",
-      isExternal: true,
-    },
-    { name: "Shop online",href: "https://easykidsroboticsshop.com/", color: "#6366f1", isExternal: true },
-    { name: "Contact Us", href: "#contact", color: "#3b82f6" },
+  const menuItems: MenuItem[] = [
+    { name: "Home", nameTh: "หน้าหลัก", href: "#home", color: "#ef4444" },
+    { name: "Competition", nameTh: "การแข่งขัน", href: "https://competition.easykidsrobotics.com/", color: "#f97316", isExternal: true },
+    { name: "Courses", nameTh: "คอร์สเรียน", href: "#courses", color: "#eab308" },
+    { name: "Files & Resources", nameTh: "ไฟล์และทรัพยากร", href: "https://resources.easykidsrobotics.com/", color: "#22c55e", isExternal: true },
+    { name: "Our Team", nameTh: "ทีมงาน", href: "#team", color: "#3b82f6" },
+    { name: "Achievements & Activities", nameTh: "ผลงานและกิจกรรม", href: "/moments-and-achievements", color: "#6464FF", isExternal: true },
+    { name: "Shop", nameTh: "ร้านค้า", href: "https://easykidsroboticsshop.com/", color: "#6E33D4", isExternal: true },
+    { name: "Contact", nameTh: "ติดต่อเรา", href: "#contact", color: "#ec4899" },
   ];
 
   // ===== Dropdown Variants สำหรับ Framer Motion =====
@@ -98,38 +121,50 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-black/70 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10">
+      <div className="w-full px-4 lg:px-6">
         {/* ===== Navbar Container ===== */}
-        <div className="flex justify-between h-20 md:h-28 items-center">
+        <div className="flex justify-between h-20 md:h-24 items-center">
           {/* Logo Section */}
           <LogoEs />
 
-          {/* ===== Desktop Menu (แสดงบน md screen ขึ้นไป) ===== */}
           {/* ===== Desktop Menu ===== */}
-<div className="hidden md:flex items-center space-x-0 lg:space-x-1">
-  {menuItems.map((item) => (
-    <button
-      key={item.name}
-      onClick={() => handleNavigation(item)}
-      className="px-2 lg:px-3 py-2 rounded-md text-sm lg:text-base font-bold tracking-wide transition-all duration-200 whitespace-nowrap"
-    >
-      <motion.span
-        whileHover={{ color: item.color }}
-        transition={{ duration: 0.3 }}
-        className="text-gray-700 dark:text-gray-300"
+<div className="hidden md:flex items-center space-x-0 lg:space-x-2">
+  {menuItems.map((item) => {
+    const active = isActive(item);
+    return (
+      <motion.button
+        key={item.name}
+        onClick={() => handleNavigation(item)}
+        whileHover="hover"
+        className="px-3 lg:px-4 py-2 rounded-md transition-all duration-200 whitespace-nowrap flex flex-col items-center"
       >
-        {item.name}
-      </motion.span>
-    </button>
-  ))}
+        <motion.span
+          variants={{ hover: { color: item.color } }}
+          animate={{ color: active ? item.color : "" }}
+          transition={{ duration: 0.2 }}
+          className="text-sm lg:text-base font-black tracking-wide leading-tight text-white"
+        >
+          {item.name}
+        </motion.span>
+        <motion.span
+          variants={{ hover: { color: item.color } }}
+          animate={{ color: active ? item.color : "" }}
+          transition={{ duration: 0.2 }}
+          className="text-xs leading-tight text-gray-400"
+        >
+          {item.nameTh}
+        </motion.span>
+      </motion.button>
+    );
+  })}
 </div>
 
           {/* ===== Mobile Menu Toggle Button ===== */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-200"
+              className="relative inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200"
               aria-expanded={isOpen}
               aria-label={isOpen ? "Close menu" : "Open menu"}
             >
@@ -169,7 +204,7 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20 shadow-lg absolute top-full left-0 right-0 overflow-hidden"
+            className="md:hidden bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-hidden"
             style={{ transformOrigin: "top center" }}
             variants={dropdownVariants}
             initial="hidden"
@@ -185,24 +220,31 @@ export const Navbar = () => {
                   initial="hidden"
                   animate="show"
                 >
-                  <button
+                  <motion.button
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavigation(item);
                     }}
-                    className="block px-4 py-3 rounded-md text-base font-bold tracking-wide transition-all duration-200 w-full text-left hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                    whileHover="hover"
+                    className="block px-4 py-3 rounded-md transition-all duration-200 w-full text-left hover:bg-white/10"
                   >
                     <motion.span
-                      whileHover={{
-                        color: item.color,
-                        x: 4,
-                      }}
+                      variants={{ hover: { color: item.color, x: 4 } }}
+                      animate={{ color: isActive(item) ? item.color : "" }}
                       transition={{ duration: 0.2 }}
-                      className="text-gray-700 dark:text-gray-300"
+                      className="text-white font-black text-sm tracking-wide block"
                     >
                       {item.name}
                     </motion.span>
-                  </button>
+                    <motion.span
+                      variants={{ hover: { color: item.color } }}
+                      animate={{ color: isActive(item) ? item.color : "" }}
+                      transition={{ duration: 0.2 }}
+                      className="text-gray-400 text-xs"
+                    >
+                      {item.nameTh}
+                    </motion.span>
+                  </motion.button>
                 </motion.div>
               ))}
             </div>

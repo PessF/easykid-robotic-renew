@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ProjectCoursePage() {
@@ -55,15 +56,19 @@ export default function ProjectCoursePage() {
       <div className="max-w-5xl mx-auto px-4 py-12">
         {/* Section 1 - Let's Build */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {/* Image placeholder */}
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-64 flex items-center justify-center">
-            <span className="text-gray-400 text-sm">Project Image</span>
+          <div className="relative w-full min-h-64 rounded-2xl overflow-hidden">
+            <Image
+              src="/pictures/course/project-course/course_project_1-1536x1145.jpg"
+              alt="Project Course"
+              fill
+              className="object-cover"
+            />
           </div>
 
           {/* Text */}
@@ -94,7 +99,7 @@ export default function ProjectCoursePage() {
 
         {/* Section 2 - EasyKids Robotics */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -128,9 +133,13 @@ export default function ProjectCoursePage() {
             </p>
           </div>
 
-          {/* Image placeholder */}
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-64 flex items-center justify-center">
-            <span className="text-gray-400 text-sm">Project Image 2</span>
+          <div className="relative w-full min-h-64 rounded-2xl overflow-hidden">
+            <Image
+              src="/pictures/course/project-course/course_project_2-600x802.jpg"
+              alt="Project Course 2"
+              fill
+              className="object-cover object-top"
+            />
           </div>
         </motion.div>
       </div>

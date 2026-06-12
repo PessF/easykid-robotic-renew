@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const sections = [
@@ -153,6 +154,27 @@ export default function KidsCoursePage() {
                   </ul>
                 )}
               </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Photo Gallery */}
+      <div className="max-w-5xl mx-auto px-4 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            "/pictures/course/kids-course/IMG_0017.jpg",
+            "/pictures/course/kids-course/IMG_8257-768x575.jpg",
+          ].map((src, i) => (
+            <motion.div
+              key={src}
+              className="relative w-full h-64 rounded-2xl overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <Image src={src} alt={`Kids course ${i + 1}`} fill className="object-cover" />
             </motion.div>
           ))}
         </div>

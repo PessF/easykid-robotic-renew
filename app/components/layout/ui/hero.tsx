@@ -1,6 +1,5 @@
 "use client";
 // components/layout/hero.tsx
-import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
 /**
@@ -119,22 +118,21 @@ export const Hero = () => {
             variants={itemVariants}
           >
             <p className="text-gray-200 text-md md:text-xl leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-              temporibus natus placeat consequatur rerum eos.
+              ศูนย์การเรียนรู้การเขียนโปรแกรมและนวัตกรรมหุ่นยนต์ เน้นการลงมือทำจริง สนุก และสร้างทักษะที่ใช้ได้ในอนาคต
             </p>
           </motion.div>
 
           {/* ===== 2.3 Call-to-Action Button ===== */}
           <motion.div variants={itemVariants}>
-            <Link
-              href="#works"
+            <a
+              href="#about"
               className="inline-flex items-center px-8 py-3 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 rounded-sm group"
             >
               เรียนรู้เพิ่มเติม
               <span className="ml-2 group-hover:translate-x-1 transition-transform">
                 →
               </span>
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </div>

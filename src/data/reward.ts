@@ -1,9 +1,11 @@
 
+const BASE = "/pictures/moment-and-reward/Achievements";
+
 export const Reward_data = [
     {
       id: 1101,
       title: "INEX ROBOTICS SCHOOL LEAGUE 2017",
-      thumbnail: "/pictures/moment-and-reward/competition/inex2017.jpg",
+      thumbnail: `${BASE}/INEX ROBOTICS SCHOOL LEAGUE 2018.jpg`,
       text: "การแข่งขันหุ่นยนต์ระดับโรงเรียนเครือข่าย INEX",
       images: [],
       date: "2017",
@@ -13,7 +15,7 @@ export const Reward_data = [
     {
       id: 1102,
       title: "WORLD ROBOT GAMES NORTH THAILAND 2018",
-      thumbnail: "/pictures/moment-and-reward/competition/wrg-north-2018.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES NORTH THAILAND 2018.jpg`,
       text: "การแข่งขันหุ่นยนต์ระดับภาคเหนือ World Robot Games",
       images: [],
       date: "2018",
@@ -23,7 +25,7 @@ export const Reward_data = [
     {
       id: 1103,
       title: "WORLD ROBOT GAMES 2017 SINGAPORE",
-      thumbnail: "/pictures/moment-and-reward/competition/wrg-2017-sg.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES 2017 SINGAPORE.jpg`,
       text: "ชัยชนะครั้งใหญ่ระดับนานาชาติ ณ ประเทศสิงคโปร์",
       images: [],
       date: "2017",
@@ -58,7 +60,7 @@ export const Reward_data = [
     {
       id: 1104,
       title: "HALL OF FAME: ABU ROBOCON & MAKERTHON",
-      thumbnail: "/pictures/rewards/hof-classic.jpg",
+      thumbnail: `${BASE}/ABU Robocon Thailand 2005.jpg`,
       text: "รวมประวัติศาสตร์รางวัลชนะเลิศระดับประเทศและเอเชียแปซิฟิก",
       images: [],
       date: "2005-2016",
@@ -98,7 +100,7 @@ export const Reward_data = [
     {
       id: 1105,
       title: "WORLD ROBOT GAMES 2018 PHILIPPINES",
-      thumbnail: "/pictures/rewards/wrg-2018-ph-cover.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES 2018 PHILIPPINES.jpg`,
       text: "ความสำเร็จระดับนานาชาติ ณ ประเทศฟิลิปปินส์ กวาดรางวัลชนะเลิศ 6 รายการ",
       images: [],
       date: "2018",
@@ -145,7 +147,7 @@ export const Reward_data = [
     {
       id: 1106,
       title: "WORLD ROBOT GAMES THAILAND 2018",
-      thumbnail: "/pictures/rewards/wrg-th-2018-cover.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES THAILAND 2018.jpg`,
       text: "การแข่งขันหุ่นยนต์ชิงแชมป์ประเทศไทย",
       images: [],
       date: "2018",
@@ -167,7 +169,7 @@ export const Reward_data = [
     {
       id: 1108,
       title: "CHIANG MAI ROBOT GAMES 2018",
-      thumbnail: "/pictures/rewards/cm-robot-2018-cover.jpg",
+      thumbnail: `${BASE}/CHIANG MAI ROBOT GAMES 2018.jpg`,
       text: "สนามแข่งขันหุ่นยนต์ระดับจังหวัดเชียงใหม่",
       images: [],
       date: "2018",
@@ -177,7 +179,7 @@ export const Reward_data = [
     {
       id: 1109,
       title: "MAKE X THAILAND 2019 (NORTH REGIONAL)",
-      thumbnail: "/pictures/rewards/makex-north-2019.jpg",
+      thumbnail: `${BASE}/MAKE X THAILAND 2019 ROBOTICS COMPETITION NORTH, THAILAND.jpeg`,
       text: "การแข่งขันรอบคัดเลือกภาคเหนือ ณ จังหวัดเชียงใหม่",
       images: [],
       date: "2019",
@@ -185,12 +187,37 @@ export const Reward_data = [
       awardTitle: "รางวัลชนะเลิศ MakeX Starter City Guardian Elementary Group",
       winners: ["ทีมนักเรียน EasyKids Robotics"],
     },
-
-
+    {
+      id: 11091,
+      title: "MAKE X THAILAND 2019 CHAMPIONSHIP",
+      thumbnail: `${BASE}/MAKE X THAILAND 2019 ROBOTICS COMPETITION CHAMPIONSHIP.jpeg`,
+      text: "การแข่งขัน MakeX Thailand รอบชิงชนะเลิศ",
+      images: [],
+      date: "2019",
+      location: "Thailand",
+    },
+    {
+      id: 11092,
+      title: "MAKEX ROBOTICS COMPETITION WORLD 2019",
+      thumbnail: `${BASE}/MAKEX ROBOTICS COMPETITION WORLD 2019 GUANGZHOU, CHINA.jpeg`,
+      text: "การแข่งขัน MakeX ระดับโลก ณ เมืองกวางโจว ประเทศจีน",
+      images: [],
+      date: "2019",
+      location: "Guangzhou, China",
+    },
+    {
+      id: 11093,
+      title: "ALL JAPAN ROBOT-SUMO TOURNAMENT 2019",
+      thumbnail: `${BASE}/ALL JAPAN ROBOT-SUMO TOURNAMENT 2019 TOKYO, JAPAN.jpeg`,
+      text: "การแข่งขันหุ่นยนต์ซูโม่ระดับนานาชาติ ณ กรุงโตเกียว ประเทศญี่ปุ่น",
+      images: [],
+      date: "2019",
+      location: "Tokyo, Japan",
+    },
     {
       id: 1110,
       title: "SUMO ROBOT ALL THAILAND FSI 2019",
-      thumbnail: "/pictures/rewards/fsi-sumo-2019.jpg",
+      thumbnail: `${BASE}/SUMO ROBOT ALL THAILAND FSI 2019.jpeg`,
       text: "กวาดรางวัลใหญ่ในสนามหุ่นยนต์ซูโม่ระดับประเทศ",
       images: [],
       date: "2019",
@@ -230,7 +257,7 @@ export const Reward_data = [
     {
       id: 1111,
       title: "WORLD ROBOT GAME 2019 THAILAND (Set A)",
-      thumbnail: "/pictures/rewards/wrg-2019-a.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAME 2019 THAILAND.jpeg`,
       text: "ผลงานยอดเยี่ยมจากรายการ World Robot Game Thailand",
       images: [],
       date: "2019",
@@ -258,7 +285,7 @@ export const Reward_data = [
     {
       id: 1112,
       title: "WORLD ROBOT GAMES THAILAND 2019 (Set B)",
-      thumbnail: "/pictures/rewards/wrg-2019-b.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES THAILAND 2019.jpeg`,
       text: "ต่อเนื่องความสำเร็จจากสนาม WRG Thailand",
       images: [],
       date: "2019",
@@ -278,9 +305,48 @@ export const Reward_data = [
       ],
     },
     {
+      id: 11094,
+      title: "การแข่งขันหุ่นยนต์นักเรียนนักศึกษา ปฏิรูปการศึกษาเชียงใหม่ ครั้งที่ 5",
+      thumbnail: `${BASE}/การแข่งขันหุ่นยนต์นักเรียนนักศึกษา งาน ปฏิรูปการศึกษาเชียงใหม่ ครั้งที่ 5.jpeg`,
+      text: "การแข่งขันหุ่นยนต์ระดับนักเรียนนักศึกษา จังหวัดเชียงใหม่",
+      images: [],
+      date: "2019",
+      location: "Chiang Mai, Thailand",
+    },
+    {
+      id: 1120,
+      title: "North East Robot Competition 2020 (NERC 2020)",
+      thumbnail: `${BASE}/North East Robot Competition.jpg`,
+      text: "การแข่งขันหุ่นยนต์ซูโม่ระดับประเทศ",
+      images: [],
+      date: "2020",
+      subActivities: [
+        {
+          id: 42,
+          title: "ชนะเลิศ: หุ่นยนต์ซูโม่ 3Kg (Open)",
+          description: "นายกันต์ กาญจนพิพัฒน์กุล (โรงเรียนดาราวิทยาลัย)",
+          images: [],
+        },
+        {
+          id: 43,
+          title: "รองชนะเลิศอันดับ 2: หุ่นยนต์ซูโม่ 1Kg (Senior/Junior)",
+          description:
+            "นายพรศักดิ์ ลี (ดาราวิทยาลัย) และ เด็กชายณัฐกรณ์ นันทการณ์ (ปรินส์รอยแยลส์วิทยาลัย)",
+          images: [],
+        },
+        {
+          id: 44,
+          title: "รองชนะเลิศอันดับ 3: หุ่นยนต์ซูโม่ 1Kg (Senior/Junior)",
+          description:
+            "นายทศวัฒน์ชัย ขอบปี (ดาราวิทยาลัย) และ Master Luka Chanakan Bond (วารีเชียงใหม่)",
+          images: [],
+        },
+      ],
+    },
+    {
       id: 1113,
       title: "FIRST TECH CHALLENGE THAILAND 2020",
-      thumbnail: "/pictures/rewards/ftc-2020-cover.jpg",
+      thumbnail: `${BASE}/FIRST TECH CHALLENGE THAILAND.jpg`,
       text: "การแข่งขันหุ่นยนต์ระดับมาตรฐานสากล ณ จ.เชียงใหม่",
       images: [],
       date: "9-11 ธันวาคม 2020",
@@ -305,7 +371,7 @@ export const Reward_data = [
     {
       id: 1114,
       title: "MakeX CHALLENGE ROBOTICS 2020",
-      thumbnail: "/pictures/rewards/makex-2020-cover.jpg",
+      thumbnail: `${BASE}/MakeX Challenge Robotics Competition.jpg`,
       text: "รางวัลชนะเลิศระดับประเทศ ณ Paradise Park กรุงเทพฯ",
       images: [],
       date: "2020",
@@ -329,7 +395,7 @@ export const Reward_data = [
     {
       id: 1115,
       title: "ROBO INNOVATOR CHALLENGE 2020",
-      thumbnail: "/pictures/rewards/robo-inno-2020-cover.jpg",
+      thumbnail: `${BASE}/ROBO INNOVATOR CHALLENGE.jpeg`,
       text: "ความสำเร็จด้าน AI และหุ่นยนต์อัจฉริยะ (Software Park Thailand)",
       images: [],
       date: "2020",
@@ -352,7 +418,7 @@ export const Reward_data = [
     {
       id: 1116,
       title: "THAILAND MICRO:CODING (TmC 2020)",
-      thumbnail: "/pictures/rewards/tmc-2020-cover.jpg",
+      thumbnail: `${BASE}/THAILAND MICROCODING CHAMPIONSHIP.jpg`,
       text: "ชิงแชมป์การเขียนโปรแกรมควบคุมหุ่นยนต์ระดับประเทศ",
       images: [],
       date: "2020",
@@ -380,57 +446,11 @@ export const Reward_data = [
       ],
     },
     {
-      id: 1117,
-      title: "ROBO INNOVATOR CHALLENGE 2022",
-      thumbnail: "/pictures/rewards/robo-inno-2022-cover.jpg",
-      text: "การแข่งขันหุ่นยนต์ด้าน AI โดย Software Park Thailand",
-      images: [
-        "/pictures/rewards/robo-inno-2022-1.jpg",
-        "/pictures/rewards/robo-inno-2022-2.jpg",
-        "/pictures/rewards/robo-inno-2022-3.jpg"
-      ],
-      date: "2022",
-      subActivities: [
-        {
-          id: 37,
-          title: "รองชนะเลิศอันดับ 2, Best Design & Best Performance",
-          description:
-            "ทีมรวมนักเรียน/นักศึกษา: นายกันต์ กาญจนพิพัฒน์กุล (มช.), นายพรศักดิ์ ลี (TNI), นายธีรวุฒิ อินถา (มทร.ล้านนา), นายดนุพัฒน์ ปานประดิษฐ์ (มก.ศรีราชา), นายภัคพล ปรีชาวนา (มงฟอร์ต), นายอารถนนท์ จักรวาล (มงฟอร์ต), นายปภังกร นิรวัชร์สุวรรณ (ปรินส์), นายฬูค่า ชนกันต์ บอนด์ (วารี), นายโอลิเวอร์ ภูมิ ฮาร์ริส (วารี), นางสาวรมน ทุมวงษ์ (วารี), นายมิ่งพิมุขข์ พลเมืองดี (วารี)",
-          images: [],
-        },
-      ],
-    },
-    {
-      id: 1118,
-      title: "FIRST LEGO LEAGUE THAILAND ONLINE 2021/22",
-      thumbnail: "/pictures/rewards/fll-2022-cover.jpg",
-      text: "การแข่งขัน FLL Thailand Online",
-      images: [
-        "/pictures/rewards/fll-2022-1.jpg",
-        "/pictures/rewards/fll-2022-2.jpg",
-        "/pictures/rewards/fll-2022-3.jpg"
-      ],
-      date: "2022",
-      awardTitle: "Core Values Inspiration Award",
-      winners: [
-        "Danuphat Panjasawatwong (CMIS)",
-        "Samart Limlenglert (CMIS)",
-        "Chitha Yungshun Hung (CMIS)",
-        "Krittin Owittayakul (CMIS)",
-        "Natgosol Wang (CMIS)",
-        "Phutin Ittirore (CMIS)",
-      ],
-    },
-    {
       id: 1119,
       title: "WORLD ROBOT GAMES ONLINE EDITION 2021",
-      thumbnail: "/pictures/rewards/wrg-2021-cover.jpg",
+      thumbnail: `${BASE}/WORLD ROBOT GAMES ONLINE EDITION.jpg`,
       text: "ความสำเร็จจากสนามออนไลน์ระดับนานาชาติ",
-      images: [
-        "/pictures/rewards/wrg-2021-1.jpg",
-        "/pictures/rewards/wrg-2021-2.jpg",
-        "/pictures/rewards/wrg-2021-3.jpg"
-      ],
+      images: [],
       date: "2021",
       subActivities: [
         {
@@ -460,31 +480,35 @@ export const Reward_data = [
       ],
     },
     {
-      id: 1120,
-      title: "North East Robot Competition 2020 (NERC 2020)",
-      thumbnail: "/pictures/rewards/nerc-2020-cover.jpg",
-      text: "การแข่งขันหุ่นยนต์ซูโม่ระดับประเทศ",
+      id: 1118,
+      title: "FIRST LEGO LEAGUE THAILAND ONLINE 2021/22",
+      thumbnail: `${BASE}/FIRST LEGO LEAGUE THAILAND ONLINE.jpeg`,
+      text: "การแข่งขัน FLL Thailand Online",
       images: [],
-      date: "2020",
+      date: "2022",
+      awardTitle: "Core Values Inspiration Award",
+      winners: [
+        "Danuphat Panjasawatwong (CMIS)",
+        "Samart Limlenglert (CMIS)",
+        "Chitha Yungshun Hung (CMIS)",
+        "Krittin Owittayakul (CMIS)",
+        "Natgosol Wang (CMIS)",
+        "Phutin Ittirore (CMIS)",
+      ],
+    },
+    {
+      id: 1117,
+      title: "ROBO INNOVATOR CHALLENGE 2022",
+      thumbnail: `${BASE}/ROBO INNOVATOR CHALLENGE1.jpg`,
+      text: "การแข่งขันหุ่นยนต์ด้าน AI โดย Software Park Thailand",
+      images: [],
+      date: "2022",
       subActivities: [
         {
-          id: 42,
-          title: "ชนะเลิศ: หุ่นยนต์ซูโม่ 3Kg (Open)",
-          description: "นายกันต์ กาญจนพิพัฒน์กุล (โรงเรียนดาราวิทยาลัย)",
-          images: [],
-        },
-        {
-          id: 43,
-          title: "รองชนะเลิศอันดับ 2: หุ่นยนต์ซูโม่ 1Kg (Senior/Junior)",
+          id: 37,
+          title: "รองชนะเลิศอันดับ 2, Best Design & Best Performance",
           description:
-            "นายพรศักดิ์ ลี (ดาราวิทยาลัย) และ เด็กชายณัฐกรณ์ นันทการณ์ (ปรินส์รอยแยลส์วิทยาลัย)",
-          images: [],
-        },
-        {
-          id: 44,
-          title: "รองชนะเลิศอันดับ 3: หุ่นยนต์ซูโม่ 1Kg (Senior/Junior)",
-          description:
-            "นายทศวัฒน์ชัย ขอบปี (ดาราวิทยาลัย) และ Master Luka Chanakan Bond (วารีเชียงใหม่)",
+            "ทีมรวมนักเรียน/นักศึกษา: นายกันต์ กาญจนพิพัฒน์กุล (มช.), นายพรศักดิ์ ลี (TNI), นายธีรวุฒิ อินถา (มทร.ล้านนา), นายดนุพัฒน์ ปานประดิษฐ์ (มก.ศรีราชา), นายภัคพล ปรีชาวนา (มงฟอร์ต), นายอารถนนท์ จักรวาล (มงฟอร์ต), นายปภังกร นิรวัชร์สุวรรณ (ปรินส์), นายฬูค่า ชนกันต์ บอนด์ (วารี), นายโอลิเวอร์ ภูมิ ฮาร์ริส (วารี), นางสาวรมน ทุมวงษ์ (วารี), นายมิ่งพิมุขข์ พลเมืองดี (วารี)",
           images: [],
         },
       ],
@@ -492,7 +516,7 @@ export const Reward_data = [
     {
       id: 1121,
       title: "FIRST® TECH CHALLENGE THAILAND 2022-2023",
-      thumbnail: "/pictures/rewards/ftc-2022-cover.jpg",
+      thumbnail: `${BASE}/FIRST TECH CHALLENGE THAILAND.jpg`,
       text: "รางวัลรองชนะเลิศอันดับ 1 ระดับประเทศ",
       images: [],
       date: "2023",
@@ -509,7 +533,7 @@ export const Reward_data = [
     {
       id: 1122,
       title: "MAKER ROBOTICS CHALLENGE 2022 (MRC)",
-      thumbnail: "/pictures/rewards/mrc-2022-cover.jpg",
+      thumbnail: `${BASE}/MAKER ROBOTICS CHALLENGE.jpg`,
       text: "กวาดรางวัลชนะเลิศหลายรายการ ณ สนาม MRC 2022",
       images: [],
       date: "2022",
@@ -550,7 +574,7 @@ export const Reward_data = [
     {
       id: 1123,
       title: "WRO 2022 : WORLD ROBOT OLYMPIAD",
-      thumbnail: "/pictures/rewards/wro-2022-cover.jpg",
+      thumbnail: `${BASE}/World Robot Olympiad.jpg`,
       text: "การแข่งขันโอลิมปิกหุ่นยนต์ ประจำปี 2022",
       images: [],
       date: "2022",
@@ -567,7 +591,7 @@ export const Reward_data = [
     {
       id: 1124,
       title: "WORLD SKILLS THAILAND 2022",
-      thumbnail: "/pictures/rewards/worldskills-2022-cover.jpg",
+      thumbnail: `${BASE}/WORLD SKILLS THAILAND.jpg`,
       text: "การแข่งขันฝีมือแรงงานแห่งชาติ ครั้งที่ 29 (ระดับภาคเหนือ)",
       images: [],
       date: "2022",
@@ -580,5 +604,13 @@ export const Reward_data = [
           images: [],
         },
       ],
+    },
+    {
+      id: 1125,
+      title: "Tech Challenge Thailand",
+      thumbnail: `${BASE}/Tech Challenge Thailand.jpg`,
+      text: "การแข่งขัน Tech Challenge ระดับประเทศไทย",
+      images: [],
+      date: "2022",
     },
 ]

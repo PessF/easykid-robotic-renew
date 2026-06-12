@@ -47,7 +47,7 @@ export const About = () => {
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+    <section id="about" className="relative py-20 md:py-32 bg-white overflow-hidden">
       {/* Background decorative elements - simplified for white theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl"></div>
