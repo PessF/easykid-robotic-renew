@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reward_data } from "@/src/data/reward";
 import { Calendar, MapPin, Award, Clock, ChevronRight, X } from "lucide-react";
@@ -218,7 +218,18 @@ type TabType = "class" | "robot" | "station" | "event" | "rewards";
 
 export default function MomentsPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<TabType>("class");
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<TabType>(() => {
+    const tab = searchParams.get("tab");
+    return (["class", "robot", "station", "event", "rewards"].includes(tab ?? "") ? tab : "class") as TabType;
+  });
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab && ["class", "robot", "station", "event", "rewards"].includes(tab)) {
+      setActiveTab(tab as TabType);
+    }
+  }, [searchParams]);
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
   const [selectedSub, setSelectedSub] = useState<SubActivity | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -247,7 +258,7 @@ export default function MomentsPage() {
       className={`bg-gray-50 min-h-screen pb-20 transition-opacity duration-500 ${isExiting ? "opacity-0" : "opacity-100"}`}
     >
       {/* 1. Header & Navigation */}
-      <div className="sticky top-0 z-30 bg-black/50 backdrop-blur-md border-b border-white/10">
+      <div className="sticky top-0 z-30 bg-black/70 backdrop-blur-md border-b border-white/10">
         <div className="w-full px-4 lg:px-6 flex items-center justify-between h-20 md:h-24">
           {/* Back button */}
           <button
@@ -261,35 +272,30 @@ export default function MomentsPage() {
           {/* Desktop Tabs */}
           <div className="hidden md:flex items-center gap-0 lg:gap-1">
             {([
-              { key: "class",   en: "Classes",     th: "คลาส",         hex: "#60a5fa" },
-              { key: "robot",   en: "Robots",       th: "หุ่นยนต์",      hex: "#fb923c" },
-              { key: "station", en: "Station",      th: "สถานที่เรียน",  hex: "#34d399" },
-              { key: "event",   en: "Activities",   th: "กิจกรรม",       hex: "#f472b6" },
-              { key: "rewards", en: "Achievements", th: "รางวัล",        hex: "#fbbf24" },
+              { key: "class",   en: "Class",       th: "คลาส",         hex: "#c87df5" },
+              { key: "robot",   en: "Robots",       th: "หุ่นยนต์",      hex: "#878cf6" },
+              { key: "station", en: "Place",        th: "สถานที่เรียน",  hex: "#6eb7e5" },
+              { key: "event",   en: "Activities",   th: "กิจกรรม",       hex: "#78bcaa" },
+              { key: "rewards", en: "Achievements", th: "รางวัล",        hex: "#e4b82a" },
             ] as const).map(({ key, en, th, hex }) => (
-              <motion.button
+              <button
                 key={key}
                 onClick={() => setActiveTab(key)}
-                whileHover="hover"
                 className="px-3 lg:px-4 py-2 whitespace-nowrap flex flex-col items-center"
               >
-                <motion.span
-                  variants={{ hover: { color: hex } }}
-                  animate={{ color: activeTab === key ? hex : "#ffffff" }}
-                  transition={{ duration: 0.2 }}
+                <span
+                  style={{ color: hex }}
                   className="text-sm lg:text-base font-black tracking-wide leading-tight"
                 >
                   {en}
-                </motion.span>
-                <motion.span
-                  variants={{ hover: { color: hex } }}
-                  animate={{ color: activeTab === key ? hex : "#9ca3af" }}
-                  transition={{ duration: 0.2 }}
-                  className="text-xs leading-tight"
+                </span>
+                <span
+                  style={{ color: hex }}
+                  className="text-xs leading-tight opacity-80"
                 >
                   {th}
-                </motion.span>
-              </motion.button>
+                </span>
+              </button>
             ))}
           </div>
 
@@ -330,39 +336,34 @@ export default function MomentsPage() {
             >
               <div className="px-4 sm:px-6 lg:px-8">
                 {([
-                  { key: "class",   en: "Classes",     th: "คลาส",         hex: "#60a5fa" },
-                  { key: "robot",   en: "Robots",       th: "หุ่นยนต์",      hex: "#fb923c" },
-                  { key: "station", en: "Station",      th: "สถานที่เรียน",  hex: "#34d399" },
-                  { key: "event",   en: "Activities",   th: "กิจกรรม",       hex: "#f472b6" },
-                  { key: "rewards", en: "Achievements", th: "รางวัล",        hex: "#fbbf24" },
+                  { key: "class",   en: "Class",     th: "คลาส",         hex: "#c87df5" },
+                  { key: "robot",   en: "Robots",       th: "หุ่นยนต์",      hex: "#878cf6" },
+                  { key: "station", en: "Place",      th: "สถานที่เรียน",  hex: "#6eb7e5" },
+                  { key: "event",   en: "Activities",   th: "กิจกรรม",       hex: "#78bcaa" },
+                  { key: "rewards", en: "Achievements", th: "รางวัล",        hex: "#e4b82a" },
                 ] as const).map(({ key, en, th, hex }, index) => (
                   <motion.div
                     key={key}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0, transition: { delay: index * 0.05, duration: 0.3 } }}
                   >
-                    <motion.button
+                    <button
                       onClick={() => { setActiveTab(key); setIsMobileOpen(false); }}
-                      whileHover="hover"
-                      className="block px-4 py-3 rounded-md transition-all duration-200 w-full text-left hover:bg-white/10"
+                      className="block px-4 py-3 rounded-md w-full text-left"
                     >
-                      <motion.span
-                        variants={{ hover: { color: hex, x: 4 } }}
-                        animate={{ color: activeTab === key ? hex : "#ffffff" }}
-                        transition={{ duration: 0.2 }}
-                        className="text-white font-black text-sm tracking-wide block"
+                      <span
+                        style={{ color: hex }}
+                        className="font-black text-sm tracking-wide block"
                       >
                         {en}
-                      </motion.span>
-                      <motion.span
-                        variants={{ hover: { color: hex } }}
-                        animate={{ color: activeTab === key ? hex : "#9ca3af" }}
-                        transition={{ duration: 0.2 }}
-                        className="text-gray-400 text-xs"
+                      </span>
+                      <span
+                        style={{ color: hex }}
+                        className="text-xs opacity-80"
                       >
                         {th}
-                      </motion.span>
-                    </motion.button>
+                      </span>
+                    </button>
                   </motion.div>
                 ))}
               </div>
@@ -374,9 +375,9 @@ export default function MomentsPage() {
       <main className="px-4 mt-6">
         <h1 className="text-3xl font-black mb-4 text-center text-gray-900 tracking-tight">
           {{
-            class: "CLASSES",
+            class: "CLASS",
             robot: "ROBOTS",
-            station: "STATION",
+            station: "PLACE",
             event: "ACTIVITIES",
             rewards: "ACHIEVEMENTS",
           }[activeTab]}
@@ -394,13 +395,15 @@ export default function MomentsPage() {
             <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 h-[55vh]">
               {galleryData.activities
                 .filter((a) => [2, 3, 4, 5].includes(a.id))
-                .map((album) => (
+                .map((album, i) => (
                   <motion.div
                     key={album.id}
                     onClick={() => setSelectedAlbum(album)}
                     className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-all h-full"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.08 }}
                     whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.25 }}
                   >
                     <Image src={album.thumbnail} alt={album.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />

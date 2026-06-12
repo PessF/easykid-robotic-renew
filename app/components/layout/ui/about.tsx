@@ -3,6 +3,8 @@ import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { Target, Lightbulb, Rocket, Trophy } from "lucide-react";
 
+const HEX = "#e08754";
+
 export const About = () => {
   const logos = [
     { src: "/pictures/sup/arduino-logo.png", alt: "Arduino" },
@@ -19,44 +21,33 @@ export const About = () => {
     { src: "/pictures/sup/ros-logo.png", alt: "ROS" }
   ];
 
-  // ===== Animation Variants =====
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-    },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.8, ease: "easeOut" },
     },
   };
 
   return (
     <section id="about" className="relative py-20 md:py-32 bg-white overflow-hidden">
-      {/* Background decorative elements - simplified for white theme */}
+      {/* Background decorative blurs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-80 h-80 bg-orange-100/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: `${HEX}18` }} />
+        <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: `${HEX}12` }} />
       </div>
 
-      {/* Robot Image Placeholders - Absolute positioned on far sides for large screens */}
+      {/* Robot images */}
       <div className="absolute inset-0 pointer-events-none hidden 2xl:block max-w-480 mx-auto">
-        {/* Left side robot image */}
         <motion.div
           initial={{ opacity: 0, x: -50, rotate: -5 }}
           whileInView={{ opacity: 1, x: 0, rotate: 0 }}
@@ -67,13 +58,12 @@ export const About = () => {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            className="w-full h-full bg-orange-100/20 flex items-center justify-center backdrop-blur-sm rounded-3xl"
+            className="w-full h-full flex items-center justify-center backdrop-blur-sm rounded-3xl"
           >
             <Image src="/pictures/robo2.png" alt="Robot" fill className="object-contain" />
           </motion.div>
         </motion.div>
 
-        {/* Right side robot image */}
         <motion.div
           initial={{ opacity: 0, x: 50, rotate: 5 }}
           whileInView={{ opacity: 1, x: 0, rotate: 0 }}
@@ -84,7 +74,7 @@ export const About = () => {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1.5 }}
-            className="w-full h-full bg-orange-100/20 flex items-center justify-center backdrop-blur-sm rounded-3xl scale-x-[-1]"
+            className="w-full h-full flex items-center justify-center backdrop-blur-sm rounded-3xl scale-x-[-1]"
           >
             <Image src="/pictures/robo1.png" alt="Robot" fill className="object-contain" />
           </motion.div>
@@ -92,7 +82,6 @@ export const About = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* ===== About Title & Content ===== */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -104,18 +93,16 @@ export const About = () => {
           <motion.div variants={itemVariants} className="text-center space-y-4">
             <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
               ศูนย์การเรียนรู้การเขียนโปรแกรม <br />
-              <span className="bg-linear-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-                และนวัตกรรมหุ่นยนต์
-              </span>
+              <span style={{ color: HEX }}>และนวัตกรรมหุ่นยนต์</span>
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl text-orange-500 font-semibold tracking-wide">
+            <p className="text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide" style={{ color: HEX }}>
               EasyKids Robotics
             </p>
           </motion.div>
 
           {/* Main content */}
           <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Text content */}
+            {/* Left */}
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg leading-relaxed">
@@ -131,20 +118,23 @@ export const About = () => {
               </div>
 
               {/* Highlight quote */}
-              <div className="p-6 rounded-lg bg-linear-to-r from-orange-100 to-orange-200 border border-orange-200 backdrop-blur-sm">
-                <p className="text-orange-700 italic text-lg font-medium">
+              <div
+                className="p-6 rounded-lg border"
+                style={{ backgroundColor: `${HEX}12`, borderColor: `${HEX}40` }}
+              >
+                <p className="italic text-lg font-medium" style={{ color: HEX }}>
                    เรียนสนุก เข้าใจง่าย ได้ประสบการณ์ เน้นการลงมือทำ ทดลอง
-                  และแก้ไขปัญหาด้วยตัวเอง 
+                  และแก้ไขปัญหาด้วยตัวเอง
                 </p>
               </div>
             </motion.div>
 
-            {/* Right: Additional info */}
+            {/* Right */}
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg leading-relaxed">
                   เราเชื่อมั่นในพลังของการ{" "}
-                  <span className="text-orange-500 font-semibold">
+                  <span className="font-semibold" style={{ color: HEX }}>
                     เรียนรู้ผ่านการลงมือทำ
                   </span>{" "}
                   (Learning by Doing)
@@ -158,10 +148,10 @@ export const About = () => {
               {/* Key features */}
               <div className="space-y-3">
                 {[
-                  { icon: <Target className="w-5 h-5 text-orange-500" />, text: "ทักษะการแก้ปัญหาเชิงระบบ" },
-                  { icon: <Lightbulb className="w-5 h-5 text-orange-500" />, text: "การสร้างสรรค์นวัตกรรม" },
-                  { icon: <Rocket className="w-5 h-5 text-orange-500" />, text: "การทำงานเป็นทีม" },
-                  { icon: <Trophy className="w-5 h-5 text-orange-500" />, text: "ความมั่นใจในการประสบความสำเร็จ" },
+                  { icon: <Target className="w-5 h-5" style={{ color: HEX }} />, text: "ทักษะการแก้ปัญหาเชิงระบบ" },
+                  { icon: <Lightbulb className="w-5 h-5" style={{ color: HEX }} />, text: "การสร้างสรรค์นวัตกรรม" },
+                  { icon: <Rocket className="w-5 h-5" style={{ color: HEX }} />, text: "การทำงานเป็นทีม" },
+                  { icon: <Trophy className="w-5 h-5" style={{ color: HEX }} />, text: "ความมั่นใจในการประสบความสำเร็จ" },
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
@@ -179,12 +169,11 @@ export const About = () => {
             </motion.div>
           </div>
 
-
-
           {/* Divider */}
           <motion.div
             variants={itemVariants}
-            className="h-1 bg-linear-to-r from-transparent via-orange-300 to-transparent"
+            className="h-1 rounded-full"
+            style={{ background: `linear-gradient(to right, transparent, ${HEX}60, transparent)` }}
           />
 
           {/* Partners Logo Section */}
@@ -192,40 +181,29 @@ export const About = () => {
             <h3 className="text-2xl font-bold text-gray-800 text-center">
               พัฒนาเด็กด้วยเพลตฟอร์มชั้นนำของโลกด้านหุ่นยนต์และการเขียนโปรแกรม
             </h3>
-            
-            {/* Marquee Animation Container */}
+
             <div className="relative overflow-hidden">
-              <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-white to-transparent z-10"></div>
-              <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-white to-transparent z-10"></div>
-              
-              {/* Marquee Track */}
+              <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-white to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-white to-transparent z-10" />
+
               <motion.div
                 className="flex"
-                animate={{
-                  x: [0, -1920],
-                }}
+                animate={{ x: [0, -1920] }}
                 transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 60,
-                    ease: "linear",
-                  },
+                  x: { repeat: Infinity, repeatType: "loop", duration: 60, ease: "linear" },
                 }}
               >
-                {/* Double the logos for seamless looping */}
                 {[...logos, ...logos].map((logo, index) => (
                   <div
                     key={index}
-                    className="shrink-0 mx-4 flex items-center justify-center h-20 w-28 
-                     rounded-lg backdrop-blur-sm transition-colors duration-300"
+                    className="shrink-0 mx-5 flex items-center justify-center h-24 w-32 rounded-lg backdrop-blur-sm transition-colors duration-300"
                   >
                     <Image
                       src={logo.src}
                       alt={logo.alt}
-                      width={60}
-                      height={30}
-                      className="object-contain max-w-20 h-auto"
+                      width={80}
+                      height={45}
+                      className="object-contain max-w-24 h-auto"
                     />
                   </div>
                 ))}

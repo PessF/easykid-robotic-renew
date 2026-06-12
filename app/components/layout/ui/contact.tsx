@@ -96,7 +96,7 @@ export const Contact = () => {
                 <h4 className="text-xl font-bold text-gray-800">Address</h4>
                 <p className="text-lg text-gray-600 leading-relaxed font-medium">
                   K-Park Business Center <br />
-                  111/9 Moo 2 T.Nonghoi A.Muang Chiang Mai 50000 THAILAND
+                  111/44 Moo 2 T.Nonghoi A.Muang Chiang Mai 50000 THAILAND
                 </p>
               </div>
             </div>

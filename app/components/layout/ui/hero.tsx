@@ -9,17 +9,17 @@ import { motion, Variants } from "framer-motion";
  * - ปุ่ม CTA มี animation delay ตามลำดับ
  */
 export const Hero = () => {
-  // ตัวอักษรสีสันสำหรับ "EASY KIDS"
+  // ตัวอักษรสีสันสำหรับ "EASY KIDS" — สีตาม navbar (Home→Contact)
   const easyKidsColors = [
-    { char: "E", color: "text-red-500" },
-    { char: "A", color: "text-orange-500" },
-    { char: "S", color: "text-yellow-500" },
-    { char: "Y", color: "text-green-500" },
+    { char: "E", color: "#c87df5" },
+    { char: "A", color: "#878cf6" },
+    { char: "S", color: "#6eb7e5" },
+    { char: "Y", color: "#78bcaa" },
     { char: " ", color: "" },
-    { char: "K", color: "text-blue-500" },
-    { char: "I", color: "text-indigo-500" },
-    { char: "D", color: "text-purple-500" },
-    { char: "S", color: "text-pink-500" },
+    { char: "K", color: "#e4b82a" },
+    { char: "I", color: "#e08754" },
+    { char: "D", color: "#d74d5e" },
+    { char: "S", color: "#a3a3a3" },
   ];
 
   // ===== Animation Variants =====
@@ -95,7 +95,8 @@ export const Hero = () => {
               {easyKidsColors.map((item, index) => (
                 <span
                   key={index}
-                  className={`${item.color} font-extrabold inline-block`}
+                  style={item.color ? { color: item.color } : undefined}
+                  className="font-extrabold inline-block text-white"
                 >
                   {item.char}
                 </span>
@@ -118,7 +119,7 @@ export const Hero = () => {
             variants={itemVariants}
           >
             <p className="text-gray-200 text-md md:text-xl leading-relaxed">
-              ศูนย์การเรียนรู้การเขียนโปรแกรมและนวัตกรรมหุ่นยนต์ เน้นการลงมือทำจริง สนุก และสร้างทักษะที่ใช้ได้ในอนาคต
+              ศูนย์การเรียนรู้การเขียนโปรแกรมและนวัตกรรมหุ่นยนต์ เน้นการลงมือทำจริง EasyKids Robotics
             </p>
           </motion.div>
 
