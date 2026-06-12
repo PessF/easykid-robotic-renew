@@ -2,12 +2,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronRight, CheckCircle2 } from "lucide-react";
-
+import Link from "next/link";
 const courses = [
   {
     title: "KIDS",
     age: "Ages 5-7",
     desc: "ไม่จำเป็นต้องมีพื้นฐาน",
+    href: "/course/kids", 
     color: "bg-blue-500",
     lightColor: "bg-blue-50",
     textColor: "text-blue-600",
@@ -26,6 +27,7 @@ const courses = [
     title: "JUNIORS",
     age: "Ages 8-12",
     desc: "ไม่จำเป็นต้องมีพื้นฐาน",
+    href: "/course/juniors",    
     color: "bg-emerald-500",
     lightColor: "bg-emerald-50",
     textColor: "text-emerald-600",
@@ -45,6 +47,7 @@ const courses = [
     title: "SENIORS",
     age: "Ages 12+",
     desc: "ไม่จำเป็นต้องมีพื้นฐาน",
+    href: "/course/seniors",
     color: "bg-orange-500",
     lightColor: "bg-orange-50",
     textColor: "text-orange-600",
@@ -68,6 +71,7 @@ const courses = [
     title: "PROJECT",
     age: "Ages 12+",
     desc: "Let's make your own project !!",
+    href: "/course/project",
     color: "bg-rose-500",
     lightColor: "bg-rose-50",
     textColor: "text-rose-600",
@@ -170,12 +174,14 @@ export const Courses = () => {
               </div>
 
               {/* Footer Button */}
-              <button
-                className={`w-full py-4 flex items-center justify-center gap-2 text-white font-bold transition-opacity hover:opacity-90 ${course.color}`}
-              >
-                รายละเอียดเพิ่มเติม
-                <ChevronRight className="w-5 h-5" />
-              </button>
+             {/* Footer Button */}
+<Link
+  href={course.href}
+  className={`w-full py-4 flex items-center justify-center gap-2 text-white font-bold transition-opacity hover:opacity-90 ${course.color}`}
+>
+  รายละเอียดเพิ่มเติม
+  <ChevronRight className="w-5 h-5" />
+</Link>
             </motion.div>
           ))}
         </div>

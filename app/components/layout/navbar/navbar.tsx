@@ -37,15 +37,17 @@ export const Navbar = () => {
   // รายการเมนู (เก็บเป็น Array จะได้แก้ที่เดียวแล้วเปลี่ยนทั้งหมด)
   const menuItems = [
     { name: "Home", href: "#home", color: "#ef4444" },
+    { name: "Competition",href: "https://competition.easykidsrobotics.com/", color: "#8b5cf6", isExternal: true },
     { name: "Courses", href: "#courses", color: "#f97316" },
     { name: "Tutorials", href: "#tutorials", color: "#eab308" },
     { name: "Our Team", href: "#team", color: "#22c55e" },
     {
       name: "Moments & Achievements",
       href: "/moments-and-achievements",
-      color: "#8b5cf6",
+      color: "#ec4899",
       isExternal: true,
     },
+    { name: "Shop online",href: "https://easykidsroboticsshop.com/", color: "#6366f1", isExternal: true },
     { name: "Contact Us", href: "#contact", color: "#3b82f6" },
   ];
 
@@ -104,25 +106,24 @@ export const Navbar = () => {
           <LogoEs />
 
           {/* ===== Desktop Menu (แสดงบน md screen ขึ้นไป) ===== */}
-          <div className="hidden md:flex space-x-1 lg:space-x-4">
-            {menuItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleNavigation(item)}
-                className="px-3 py-2 rounded-md text-sm lg:text-base font-bold tracking-wide transition-all duration-200"
-              >
-                <motion.span
-                  whileHover={{
-                    color: item.color,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="text-gray-700 dark:text-gray-300"
-                >
-                  {item.name}
-                </motion.span>
-              </button>
-            ))}
-          </div>
+          {/* ===== Desktop Menu ===== */}
+<div className="hidden md:flex items-center space-x-0 lg:space-x-1">
+  {menuItems.map((item) => (
+    <button
+      key={item.name}
+      onClick={() => handleNavigation(item)}
+      className="px-2 lg:px-3 py-2 rounded-md text-sm lg:text-base font-bold tracking-wide transition-all duration-200 whitespace-nowrap"
+    >
+      <motion.span
+        whileHover={{ color: item.color }}
+        transition={{ duration: 0.3 }}
+        className="text-gray-700 dark:text-gray-300"
+      >
+        {item.name}
+      </motion.span>
+    </button>
+  ))}
+</div>
 
           {/* ===== Mobile Menu Toggle Button ===== */}
           <div className="md:hidden">
@@ -175,7 +176,7 @@ export const Navbar = () => {
             animate="show"
             exit="exit"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-1">
+            <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
               {menuItems.map((item, index) => (
                 <motion.div
                   key={item.name}
