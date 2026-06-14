@@ -39,9 +39,12 @@ export const Navbar = () => {
   const [momentDropdownLeft, setMomentDropdownLeft] = useState(0);
   const coursesButtonRef = useRef<HTMLButtonElement>(null);
   const momentButtonRef = useRef<HTMLButtonElement>(null);
+  const courseCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const momentCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
 
   const handleCoursesEnter = () => {
+    if (courseCloseTimer.current) clearTimeout(courseCloseTimer.current);
     if (coursesButtonRef.current) {
       const rect = coursesButtonRef.current.getBoundingClientRect();
       setCourseDropdownLeft(rect.left + rect.width / 2 - 120);
@@ -49,12 +52,21 @@ export const Navbar = () => {
     setCourseDropdownOpen(true);
   };
 
+  const handleCoursesLeave = () => {
+    courseCloseTimer.current = setTimeout(() => setCourseDropdownOpen(false), 120);
+  };
+
   const handleMomentEnter = () => {
+    if (momentCloseTimer.current) clearTimeout(momentCloseTimer.current);
     if (momentButtonRef.current) {
       const rect = momentButtonRef.current.getBoundingClientRect();
       setMomentDropdownLeft(rect.left + rect.width / 2 - 120);
     }
     setMomentDropdownOpen(true);
+  };
+
+  const handleMomentLeave = () => {
+    momentCloseTimer.current = setTimeout(() => setMomentDropdownOpen(false), 120);
   };
 
   const handleNavigation = (item: MenuItem) => {
@@ -119,7 +131,7 @@ export const Navbar = () => {
                     ref={coursesButtonRef}
                     onClick={() => handleNavigation(item)}
                     onMouseEnter={handleCoursesEnter}
-                    onMouseLeave={() => setCourseDropdownOpen(false)}
+                    onMouseLeave={handleCoursesLeave}
                     className="px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
                   >
                     <span style={{ color: item.color }} className="text-sm lg:text-base font-black tracking-wide leading-tight">{item.name}</span>
@@ -135,7 +147,7 @@ export const Navbar = () => {
                     ref={momentButtonRef}
                     onClick={() => handleNavigation(item)}
                     onMouseEnter={handleMomentEnter}
-                    onMouseLeave={() => setMomentDropdownOpen(false)}
+                    onMouseLeave={handleMomentLeave}
                     className="px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
                   >
                     <span style={{ color: item.color }} className="text-sm lg:text-base font-black tracking-wide leading-tight">{item.name}</span>
@@ -192,8 +204,8 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={() => setCourseDropdownOpen(true)}
-            onMouseLeave={() => setCourseDropdownOpen(false)}
+            onMouseEnter={() => { if (courseCloseTimer.current) clearTimeout(courseCloseTimer.current); setCourseDropdownOpen(true); }}
+            onMouseLeave={handleCoursesLeave}
             className="hidden md:block fixed top-20 md:top-24 rounded-b-xl border-x border-b border-white/10 overflow-hidden min-w-[240px]"
             style={{ left: courseDropdownLeft }}
           >
@@ -219,8 +231,8 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={() => setMomentDropdownOpen(true)}
-            onMouseLeave={() => setMomentDropdownOpen(false)}
+            onMouseEnter={() => { if (momentCloseTimer.current) clearTimeout(momentCloseTimer.current); setMomentDropdownOpen(true); }}
+            onMouseLeave={handleMomentLeave}
             className="hidden md:block fixed top-20 md:top-24 rounded-b-xl border-x border-b border-white/10 overflow-hidden min-w-[240px]"
             style={{ left: momentDropdownLeft }}
           >

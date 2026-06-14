@@ -4,7 +4,12 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reward_data } from "@/src/data/reward";
-import { Calendar, MapPin, Award, Clock, ChevronRight, X } from "lucide-react";
+import { Clock, ChevronRight, X } from "lucide-react";
+import { ClassTab } from "./class";
+import { RobotsTab } from "./robots";
+import { PlaceTab } from "./place";
+import { ActivitiesTab } from "./activities";
+import { AchievementsTab } from "./achievements";
 
 // --- Types ---
 interface SubActivity {
@@ -163,19 +168,25 @@ const galleryData: GalleryDataType = {
     {
       id: 7,
       title: "สถานที่เรียน",
-      thumbnail: "/pictures/moment-and-reward/station/721465362_973841798860526_5567708603152716272_n.jpg",
+      thumbnail: "/pictures/moment-and-reward/place/mainPic.jpg",
       text: "EasyKids Robotics Coding & Robotics Learning Center",
       images: [
-        "/pictures/moment-and-reward/station/717200547_1917548895609090_6736944630095205875_n.jpg",
-        "/pictures/moment-and-reward/station/721465362_973841798860526_5567708603152716272_n.jpg",
-        "/pictures/moment-and-reward/station/720775758_3549590191865680_4810622963506079099_n.jpg",
-        "/pictures/moment-and-reward/station/718674382_1531506575190419_3494274985599527837_n.jpg",
-        "/pictures/moment-and-reward/station/717115017_4237851319861059_7263845058386050531_n.jpg",
-        "/pictures/moment-and-reward/station/719899584_1357301262958077_5220662197406570121_n.jpg",
-        "/pictures/moment-and-reward/station/722363324_1887266711966822_5471604521954566373_n.jpg",
-        "/pictures/moment-and-reward/station/722406947_1000554122898314_6622005954083801438_n.jpg",
-        "/pictures/moment-and-reward/station/718131107_3348946275266222_637304359523142809_n.jpg",
-        "/pictures/moment-and-reward/station/721841047_3222924734575077_1138527598217169886_n.jpg",
+        "/pictures/moment-and-reward/place/mainPic.jpg",
+        "/pictures/moment-and-reward/place/481084915_1143877667539566_439416908184743542_n.jpg",
+        "/pictures/moment-and-reward/place/481173357_1143877610872905_2519315971267816348_n.jpg",
+        "/pictures/moment-and-reward/place/481245019_1143877597539573_2125364573608562566_n.jpg",
+        "/pictures/moment-and-reward/place/481262284_1143877637539569_8566909507504069389_n.jpg",
+        "/pictures/moment-and-reward/place/481279245_1143877404206259_9107694821029795168_n.jpg",
+        "/pictures/moment-and-reward/place/481288537_1143877634206236_7779569237147723270_n.jpg",
+        "/pictures/moment-and-reward/place/481302233_1143877654206234_8417139135951192365_n.jpg",
+        "/pictures/moment-and-reward/place/481319711_1143877600872906_2656197402790455492_n.jpg",
+        "/pictures/moment-and-reward/place/481356759_1143877644206235_1299823932753315439_n.jpg",
+        "/pictures/moment-and-reward/place/481899986_1143877630872903_4323169250270140444_n.jpg",
+        "/pictures/moment-and-reward/place/481903974_1143877650872901_5630430244745879696_n.jpg",
+        "/pictures/moment-and-reward/place/481908097_1143877670872899_7752487471213289100_n.jpg",
+        "/pictures/moment-and-reward/place/481910353_1143877607539572_2898674926291834674_n.jpg",
+        "/pictures/moment-and-reward/place/482025778_1143877594206240_7040841758028588803_n.jpg",
+        "/pictures/moment-and-reward/place/482026391_1143877604206239_2705486079763349491_n.jpg",
       ],
     },
   ],
@@ -383,212 +394,35 @@ export default function MomentsPage() {
           }[activeTab]}
         </h1>
 
-        {/* Tab: คลาส */}
-        {activeTab === 'class' && (() => {
-          const colorMap: Record<number, string> = {
-            2: "text-blue-400",
-            3: "text-emerald-400",
-            4: "text-orange-400",
-            5: "text-rose-400",
-          };
-          return (
-            <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 h-[55vh]">
-              {galleryData.activities
-                .filter((a) => [2, 3, 4, 5].includes(a.id))
-                .map((album, i) => (
-                  <motion.div
-                    key={album.id}
-                    onClick={() => setSelectedAlbum(album)}
-                    className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-all h-full"
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: i * 0.08 }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <Image src={album.thumbnail} alt={album.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/30 backdrop-blur-sm rounded-b-2xl">
-                      <h3 className={`text-base font-black leading-tight ${colorMap[album.id] ?? "text-white"}`}>{album.title}</h3>
-                      <p className="text-white/70 text-xs line-clamp-1 mt-0.5">{album.text}</p>
-                    </div>
-                  </motion.div>
-                ))}
-            </div>
-          );
-        })()}
-
-        {/* Tab: หุ่นยนต์และอุปกรณ์ */}
-        {activeTab === 'robot' && (
-          <div className="max-w-4xl mx-auto space-y-3">
-            {/* 4 รูปใหม่ — hero 2x2 */}
-            <div className="grid grid-cols-2 gap-3">
-              {galleryData.activities.find((a) => a.id === 6)?.images.slice(0, 4).map((src, i) => (
-                <motion.div
-                  key={i}
-                  className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-zoom-in group"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: i * 0.06 }}
-                  onClick={() => setSelectedImage(src)}
-                >
-                  <Image src={src} alt={`robot-${i}`} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* รูปทั้งหมด — grid สม่ำเสมอ */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
-              {galleryData.activities.find((a) => a.id === 6)?.images.slice(4).map((src, i) => (
-                <motion.div
-                  key={i}
-                  className="relative aspect-square rounded-xl overflow-hidden cursor-zoom-in group"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.25, delay: i * 0.02 }}
-                  onClick={() => setSelectedImage(src)}
-                >
-                  <Image src={src} alt={`robot-${i + 4}`} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
+        {activeTab === 'class' && (
+          <ClassTab activities={galleryData.activities} setSelectedAlbum={setSelectedAlbum} />
         )}
 
-        {/* Tab: สถานที่เรียน */}
-        {activeTab === 'station' && (() => {
-          const imgs = galleryData.activities.find((a) => a.id === 7)?.images ?? [];
-          const [hero, ...rest] = imgs;
-          return (
-            <div className="max-w-4xl mx-auto space-y-3">
-              {/* รูปใหญ่บนสุด */}
-              {hero && (
-                <motion.div
-                  className="relative w-full h-[55vh] rounded-2xl overflow-hidden cursor-zoom-in group"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  onClick={() => setSelectedImage(hero)}
-                >
-                  <Image src={hero} alt="station-0" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-                </motion.div>
-              )}
-              {/* กริดรูปเล็ก */}
-              <div className="grid grid-cols-3 gap-3">
-                {rest.map((src, i) => (
-                  <motion.div
-                    key={i}
-                    className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-zoom-in group"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: i * 0.04 }}
-                    onClick={() => setSelectedImage(src)}
-                  >
-                    <Image src={src} alt={`station-${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          );
-        })()}
+        {activeTab === 'robot' && (
+          <RobotsTab
+            images={galleryData.activities.find((a) => a.id === 6)?.images ?? []}
+            setSelectedImage={setSelectedImage}
+          />
+        )}
 
-        {/* Tab: กิจกรรม + รางวัล — card style เดียวกันทุกอย่าง */}
-        {(activeTab === 'event' || activeTab === 'rewards') && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {(activeTab === 'rewards' ? visibleRewards : galleryData.events).map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: idx * 0.04 }}
-                >
-                  {/* รูปภาพ */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* overlay gradient */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
-                    {/* วันที่ badge บนรูป */}
-                    {item.date && (
-                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                        <Calendar size={11} />
-                        {item.date}
-                      </div>
-                    )}
-                    {/* location badge */}
-                    {item.location && (
-                      <div className="absolute bottom-3 left-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full">
-                        <MapPin size={11} />
-                        {item.location}
-                      </div>
-                    )}
-                  </div>
+        {activeTab === 'station' && (
+          <PlaceTab
+            images={galleryData.activities.find((a) => a.id === 7)?.images ?? []}
+            setSelectedImage={setSelectedImage}
+          />
+        )}
 
-                  {/* เนื้อหา */}
-                  <div className="p-5">
-                    <h3 className="text-base font-black text-gray-900 leading-snug mb-1 group-hover:text-amber-600 transition-colors duration-200">
-                      {item.title}
-                    </h3>
-                    {item.text && (
-                      <p className="text-gray-500 text-xs leading-relaxed mb-3">{item.text}</p>
-                    )}
+        {activeTab === 'event' && (
+          <ActivitiesTab events={galleryData.events} />
+        )}
 
-                    {/* Award badge */}
-                    {item.awardTitle && (
-                      <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 mb-3">
-                        <Award size={15} className="text-amber-500 mt-0.5 shrink-0" />
-                        <div>
-                          <p className="text-amber-700 font-bold text-xs">{item.awardTitle}</p>
-                          {item.winners && (
-                            <p className="text-amber-600 text-xs mt-0.5 leading-relaxed">{item.winners.join(' · ')}</p>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Sub-activities */}
-                    {item.subActivities && item.subActivities.length > 0 && (
-                      <div className="border-t border-gray-100 pt-3 mt-1 space-y-1.5">
-                        {item.subActivities.map((sub) => (
-                          <div key={sub.id} className="flex items-start gap-2">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
-                            <div>
-                              <p className="text-xs font-semibold text-gray-700">{sub.title}</p>
-                              {sub.description && <p className="text-xs text-gray-400 mt-0.5">{sub.description}</p>}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-              {activeTab === 'event' && galleryData.events.length === 0 && (
-                <p className="col-span-3 text-center text-gray-400 py-16 text-sm">กำลังเพิ่มข้อมูลกิจกรรม — Coming Soon</p>
-              )}
-            </div>
-            {activeTab === 'rewards' && hasMoreRewards && (
-              <div className="flex justify-center mt-12">
-                <motion.button
-                  onClick={loadMoreRewards}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  โหลดเพิ่มอีก {Math.min(6, galleryData.rewards.length - visibleRewardsCount)} รายการ
-                </motion.button>
-              </div>
-            )}
-          </>
+        {activeTab === 'rewards' && (
+          <AchievementsTab
+            visibleRewards={visibleRewards}
+            hasMoreRewards={hasMoreRewards}
+            loadMoreRewards={loadMoreRewards}
+            remaining={Math.min(6, galleryData.rewards.length - visibleRewardsCount)}
+          />
         )}
       </main>
 
