@@ -1,10 +1,10 @@
 "use client";
 
 import { LogoEs } from "@/app/components/layout/navbar/logo";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { smoothScrollTo } from "@/src/scroll";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface MenuItem {
@@ -37,11 +37,49 @@ export const Navbar = () => {
   const [mobileMomentOpen, setMobileMomentOpen] = useState(false);
   const [courseDropdownLeft, setCourseDropdownLeft] = useState(0);
   const [momentDropdownLeft, setMomentDropdownLeft] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>("Home");
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const coursesButtonRef = useRef<HTMLButtonElement>(null);
   const momentButtonRef = useRef<HTMLButtonElement>(null);
   const courseCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const momentCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
+
+  // ตรวจสอบ active item จาก path
+  useEffect(() => {
+    if (pathname === "/moments-and-achievements") {
+      setActiveSection("Achievements & Activities");
+      return;
+    }
+    if (pathname.startsWith("/course/")) {
+      setActiveSection("Courses");
+      return;
+    }
+    if (pathname !== "/") return;
+
+    // บนหน้าหลัก ใช้ IntersectionObserver จับ section ที่กำลังดูอยู่
+    const sectionMap: Record<string, string> = {
+      home: "Home",
+      courses: "Courses",
+      team: "Our Team",
+      contact: "Contact",
+    };
+
+    const observers: IntersectionObserver[] = [];
+    Object.keys(sectionMap).forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(sectionMap[id]); },
+        { threshold: 0.4 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, [pathname]);
 
   const handleCoursesEnter = () => {
     if (courseCloseTimer.current) clearTimeout(courseCloseTimer.current);
@@ -116,7 +154,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-md border-b border-white/10" onMouseLeave={() => setHoveredItem(null)}>
       <div className="w-full px-4 lg:px-6">
         <div className="flex justify-between h-20 md:h-24 items-center">
           <LogoEs />
@@ -124,18 +162,25 @@ export const Navbar = () => {
           {/* ===== Desktop Menu ===== */}
           <div className="hidden md:flex items-center space-x-0 lg:space-x-2">
             {menuItems.map((item) => {
+              const isActive = activeSection === item.name;
+              const isHovered = hoveredItem === item.name;
+              const showBar = isActive || isHovered;
+
               if (item.name === "Courses") {
                 return (
                   <button
                     key={item.name}
                     ref={coursesButtonRef}
                     onClick={() => handleNavigation(item)}
-                    onMouseEnter={handleCoursesEnter}
-                    onMouseLeave={handleCoursesLeave}
-                    className="px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
+                    onMouseEnter={() => { handleCoursesEnter(); setHoveredItem(item.name); }}
+                    onMouseLeave={() => { handleCoursesLeave(); }}
+                    className="relative px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
                   >
                     <span style={{ color: item.color }} className="text-sm lg:text-base font-black tracking-wide leading-tight">{item.name}</span>
                     <span style={{ color: item.color }} className="text-xs leading-tight opacity-80">{item.nameTh}</span>
+                    {showBar && (
+                      <div className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full" style={{ backgroundColor: item.color, opacity: isActive ? 1 : 0.5 }} />
+                    )}
                   </button>
                 );
               }
@@ -146,12 +191,15 @@ export const Navbar = () => {
                     key={item.name}
                     ref={momentButtonRef}
                     onClick={() => handleNavigation(item)}
-                    onMouseEnter={handleMomentEnter}
-                    onMouseLeave={handleMomentLeave}
-                    className="px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
+                    onMouseEnter={() => { handleMomentEnter(); setHoveredItem(item.name); }}
+                    onMouseLeave={() => { handleMomentLeave(); }}
+                    className="relative px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
                   >
                     <span style={{ color: item.color }} className="text-sm lg:text-base font-black tracking-wide leading-tight">{item.name}</span>
                     <span style={{ color: item.color }} className="text-xs leading-tight opacity-80">{item.nameTh}</span>
+                    {showBar && (
+                      <div className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full" style={{ backgroundColor: item.color, opacity: isActive ? 1 : 0.5 }} />
+                    )}
                   </button>
                 );
               }
@@ -160,10 +208,14 @@ export const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavigation(item)}
-                  className="px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
+                  onMouseEnter={() => setHoveredItem(item.name)}
+                  className="relative px-3 lg:px-4 py-2 rounded-md whitespace-nowrap flex flex-col items-center"
                 >
                   <span style={{ color: item.color }} className="text-sm lg:text-base font-black tracking-wide leading-tight">{item.name}</span>
                   <span style={{ color: item.color }} className="text-xs leading-tight opacity-80">{item.nameTh}</span>
+                  {showBar && (
+                    <div className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full" style={{ backgroundColor: item.color, opacity: isActive ? 1 : 0.5 }} />
+                  )}
                 </button>
               );
             })}
@@ -204,14 +256,15 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={() => { if (courseCloseTimer.current) clearTimeout(courseCloseTimer.current); setCourseDropdownOpen(true); }}
+            onMouseEnter={() => { if (courseCloseTimer.current) clearTimeout(courseCloseTimer.current); setCourseDropdownOpen(true); setHoveredItem("Courses"); }}
             onMouseLeave={handleCoursesLeave}
             className="hidden md:block fixed top-20 md:top-24 rounded-b-xl border-x border-b border-white/10 overflow-hidden min-w-[240px]"
             style={{ left: courseDropdownLeft }}
           >
             {courseSubItems.map((sub, i) => (
               <Link key={i} href={sub.href}>
-                <div className="px-5 py-3 bg-black/70 backdrop-blur-md cursor-pointer">
+                <div className="relative px-5 py-3 bg-black/70 backdrop-blur-md cursor-pointer group">
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: sub.color }} />
                   <p className="text-xs text-white/50 font-medium tracking-wide">CODING & ROBOTICS COURSE</p>
                   <p style={{ color: sub.color }} className="font-black text-sm tracking-wide">
                     {sub.label} : {sub.age}
@@ -231,14 +284,15 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={() => { if (momentCloseTimer.current) clearTimeout(momentCloseTimer.current); setMomentDropdownOpen(true); }}
+            onMouseEnter={() => { if (momentCloseTimer.current) clearTimeout(momentCloseTimer.current); setMomentDropdownOpen(true); setHoveredItem("Achievements & Activities"); }}
             onMouseLeave={handleMomentLeave}
             className="hidden md:block fixed top-20 md:top-24 rounded-b-xl border-x border-b border-white/10 overflow-hidden min-w-[240px]"
             style={{ left: momentDropdownLeft }}
           >
             {momentSubItems.map((sub, i) => (
               <Link key={i} href={sub.href}>
-                <div className="px-5 py-3 bg-black/70 backdrop-blur-md cursor-pointer">
+                <div className="relative px-5 py-3 bg-black/70 backdrop-blur-md cursor-pointer group">
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: sub.color }} />
                   <p className="text-xs text-white/50 font-medium tracking-wide">ACHIEVEMENTS & ACTIVITIES</p>
                   <p style={{ color: sub.color }} className="font-black text-sm tracking-wide">
                     {sub.label}
