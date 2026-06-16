@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+// เพิ่มการนำเข้า Suspense จาก react
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -191,7 +192,6 @@ const galleryData: GalleryDataType = {
       ],
     },
   ],
-  // นำข้อมูลรางวัลจาก Reward_data มาใช้ และเรียงลำดับล่าสุดอยู่ด้านบน
   rewards: sortRewardsByDate(Reward_data),
   events: [
     {
@@ -224,11 +224,10 @@ const galleryData: GalleryDataType = {
   ],
 };
 
-
-
 type TabType = "class" | "robot" | "station" | "event" | "rewards";
 
-export default function MomentsPage() {
+// 1. แยกโค้ดเดิมที่ใช้ useSearchParams มาไว้ในคอมโพเนนต์ย่อยนี้
+function MomentsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<TabType>(() => {
@@ -256,12 +255,10 @@ export default function MomentsPage() {
     router.back();
   };
 
-  // ฟังก์ชันโหลดรางวัลเพิ่ม
   const loadMoreRewards = () => {
-    setVisibleRewardsCount((prev) => prev + 6); // โหลดเพิ่มครั้งละ 6 รายการ
+    setVisibleRewardsCount((prev) => prev + 6);
   };
 
-  // รางวัลที่แสดงในปัจจุบัน
   const visibleRewards = galleryData.rewards.slice(0, visibleRewardsCount);
   const hasMoreRewards = visibleRewardsCount < galleryData.rewards.length;
 
@@ -269,10 +266,9 @@ export default function MomentsPage() {
     <div
       className={`bg-gray-50 min-h-screen pb-20 transition-opacity duration-500 ${isExiting ? "opacity-0" : "opacity-100"}`}
     >
-      {/* 1. Header & Navigation */}
+      {/* Header & Navigation */}
       <div className="sticky top-0 z-30 bg-black/70 backdrop-blur-md border-b border-white/10">
         <div className="w-full px-4 lg:px-6 flex items-center justify-between h-20 md:h-24">
-          {/* Back button */}
           <button
             onClick={handleBack}
             className="flex items-center gap-2 text-white font-bold text-base hover:text-gray-300 transition-colors group shrink-0"
@@ -281,7 +277,6 @@ export default function MomentsPage() {
             กลับหน้าหลัก
           </button>
 
-          {/* Desktop Tabs */}
           <div className="hidden md:flex items-center gap-0 lg:gap-1">
             {([
               { key: "class",   en: "Class",       th: "คลาส",         hex: "#c87df5" },
@@ -311,7 +306,6 @@ export default function MomentsPage() {
             ))}
           </div>
 
-          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -336,7 +330,6 @@ export default function MomentsPage() {
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
@@ -427,7 +420,7 @@ export default function MomentsPage() {
         )}
       </main>
 
-      {/* 3. Modal Layer - รองรับการย้อนกลับหลายชั้น */}
+      {/* Modal Layer */}
       <AnimatePresence>
         {selectedAlbum && (
           <motion.div
@@ -436,10 +429,8 @@ export default function MomentsPage() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-white overflow-y-auto"
           >
-            {/* Modal Header (แถบด้านบน) */}
             <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md px-6 py-4 border-b flex justify-between items-center">
               <div className="flex items-center gap-4">
-                {/* ✅ ปุ่มย้อนกลับอัจฉริยะ */}
                 <button
                   onClick={() =>
                     selectedSub ? setSelectedSub(null) : setSelectedAlbum(null)
@@ -476,7 +467,6 @@ export default function MomentsPage() {
             </div>
 
             <div className="max-w-7xl mx-auto p-6">
-              {/* --- ส่วนที่ 1: หน้าแสดงรายการกิจกรรมย่อย (ถ้ามี) --- */}
               {selectedAlbum.subActivities && !selectedSub && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {selectedAlbum.subActivities.map((sub) => (
@@ -510,7 +500,6 @@ export default function MomentsPage() {
                 </div>
               )}
 
-              {/* --- ส่วนที่ 2: หน้าแสดงรูปภาพทั้งหมด (เมื่อกดเข้าไปใน Sub หรือ อัลบั้มปกติที่ไม่มี Sub) --- */}
               {(selectedSub || !selectedAlbum.subActivities) && (
                 <div className="columns-2 md:columns-4 gap-3 space-y-3">
                   {(selectedSub
@@ -575,5 +564,20 @@ export default function MomentsPage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+// 2. ตัวหลักของหน้าจะทำการ export default โดยห่อหุ้มคอมโพเนนต์ MomentsContent ไว้ข้างใน Suspense 
+export default function MomentsPage() {
+  return (
+    <Suspense 
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center text-gray-500 font-bold">
+          กำลังโหลด...
+        </div>
+      }
+    >
+      <MomentsContent />
+    </Suspense>
   );
 }
