@@ -36,18 +36,20 @@ interface GalleryDataType {
 
 // ฟังก์ชันสำหรับเรียงลำดับรางวัลตามปี (ล่าสุดอยู่ด้านบน)
 const sortRewardsByDate = (rewards: Album[]) => {
+  if (!rewards || !Array.isArray(rewards)) {
+    return [];
+  }
+
   return [...rewards].sort((a, b) => {
-    // แปลงวันที่ให้เป็นปี โดยดึงปีจากสตริง
     const getYear = (dateStr: string | undefined) => {
       if (!dateStr) return 0;
-      // หาตัวเลข 4 หลัก (ปี) ในสตริง
       const yearMatch = dateStr.match(/\b(20\d{2})\b/);
       return yearMatch ? parseInt(yearMatch[1]) : 0;
     };
     
     const yearA = getYear(a.date);
     const yearB = getYear(b.date);
-    return yearB - yearA; // เรียงจากปีล่าสุดไปเก่าสุด
+    return yearB - yearA; 
   });
 };
 

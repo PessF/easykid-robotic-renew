@@ -1,0 +1,12 @@
+services:
+  next-bun-dev:
+    image: oven/bun:alpine
+    container_name: next-bun-dev
+    working_dir: /app
+    ports:
+      - "3000:3000" # เปิดพอร์ต 3000 ให้เราเข้าเว็บได้
+    volumes:
+      - .:/app # เชื่อมโค้ดจากเครื่องเราเข้าไปในตู้
+      - /app/.next # แยกโฟลเดอร์แคชไว้ในตู้เพื่อความเร็ว
+      # - /app/node_modules # แยกโฟลเดอร์ปลั๊กอินไว้ในตู้ ไม่ให้ทับเครื่องจริง
+    command: sh -c "bun install && bun dev" # สั่งให้ลงปลั๊กอินและรันโหมดพัฒนาทันที
