@@ -39,7 +39,6 @@ interface GalleryDataType {
   events: Album[];
 }
 
-// ฟังก์ชันสำหรับเรียงลำดับรางวัลตามปี (ล่าสุดอยู่ด้านบน)
 const sortRewardsByDate = (rewards: Album[]) => {
   if (!rewards || !Array.isArray(rewards)) {
     return [];
