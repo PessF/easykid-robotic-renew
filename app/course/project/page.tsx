@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+const HEX = "#d74d5e";
+
 export default function ProjectCoursePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -11,7 +13,8 @@ export default function ProjectCoursePage() {
       <div className="max-w-5xl mx-auto px-4 pt-8">
         <Link href="/#courses">
           <motion.span
-            className="inline-flex items-center gap-1 text-rose-500 font-semibold text-sm cursor-pointer hover:underline"
+            style={{ color: HEX }}
+            className="inline-flex items-center gap-1 font-semibold text-sm cursor-pointer hover:underline"
             whileHover={{ x: -3 }}
             transition={{ duration: 0.2 }}
           >
@@ -31,9 +34,9 @@ export default function ProjectCoursePage() {
           CODING & ROBOTICS COURSE
         </h1>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-1">
-          <span className="text-rose-500">PROJECT</span> : Ages 12+
+          <span style={{ color: HEX }}>PROJECT</span> : Ages 12+
         </h2>
-        <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-rose-500" />
+        <div className="mt-4 mx-auto w-16 h-1 rounded-full" style={{ backgroundColor: HEX }} />
       </motion.div>
 
       {/* Description */}
@@ -48,7 +51,7 @@ export default function ProjectCoursePage() {
           ที่มีพื้นฐานการเขียน Code
         </p>
         <p className="italic font-semibold text-gray-700 dark:text-gray-200">
-           เรียนสนุก เข้าใจง่าย ได้ประสบการณ์ เน้นการลงมือทำ ทดลอง และแก้ไขปัญหาด้วยตัวเอง 
+           เรียนสนุก เข้าใจง่าย ได้ประสบการณ์ เน้นการลงมือทำ ทดลอง และแก้ไขปัญหาด้วยตัวเอง
         </p>
       </motion.div>
 

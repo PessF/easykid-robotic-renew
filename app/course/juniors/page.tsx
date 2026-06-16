@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+const HEX = "#78bcaa";
+
 export default function JuniorsCoursePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -11,7 +13,8 @@ export default function JuniorsCoursePage() {
       <div className="max-w-5xl mx-auto px-4 pt-8">
         <Link href="/#courses">
           <motion.span
-            className="inline-flex items-center gap-1 text-emerald-500 font-semibold text-sm cursor-pointer hover:underline"
+            style={{ color: HEX }}
+            className="inline-flex items-center gap-1 font-semibold text-sm cursor-pointer hover:underline"
             whileHover={{ x: -3 }}
             transition={{ duration: 0.2 }}
           >
@@ -31,9 +34,9 @@ export default function JuniorsCoursePage() {
           CODING & ROBOTICS COURSE
         </h1>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-1">
-          <span className="text-emerald-500">JUNIORS</span> : Ages 8-12
+          <span style={{ color: HEX }}>JUNIORS</span> : Ages 8-12
         </h2>
-        <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-emerald-500" />
+        <div className="mt-4 mx-auto w-16 h-1 rounded-full" style={{ backgroundColor: HEX }} />
       </motion.div>
 
       {/* Description */}
@@ -87,7 +90,7 @@ export default function JuniorsCoursePage() {
           การเรียนรู้ของน้อง ๆ จะแบ่งเป็น 2 ส่วนหลัก
         </motion.h3>
         <div className="flex justify-center mb-10">
-          <div className="w-16 h-1 rounded-full bg-emerald-500" />
+          <div className="w-16 h-1 rounded-full" style={{ backgroundColor: HEX }} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,9 +102,9 @@ export default function JuniorsCoursePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="h-1.5 w-full bg-emerald-500" />
+            <div className="h-1.5 w-full" style={{ backgroundColor: HEX }} />
             <div className="p-6 space-y-4">
-              <h4 className="font-bold text-lg text-emerald-600">CODING :</h4>
+              <h4 className="font-bold text-lg" style={{ color: HEX }}>CODING :</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 สนุกกับการเขียนโปรแกรมเนื้อต้นที่ไม่ยาก เสริมสร้างจินตนาการด้วย Block-Based Coding
                 การต่อ Block คำสั่งที่ใช้วิธีลาก-วางคำสั่งให้เป็นลำดับต่อ ๆ กัน
@@ -116,7 +119,7 @@ export default function JuniorsCoursePage() {
                 <ul className="space-y-1">
                   {["Block-Based Coding", "Python", "C/C++"].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}
@@ -140,7 +143,7 @@ export default function JuniorsCoursePage() {
                     "Engineering Design",
                   ].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}
@@ -157,9 +160,9 @@ export default function JuniorsCoursePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="h-1.5 w-full bg-emerald-500" />
+            <div className="h-1.5 w-full" style={{ backgroundColor: HEX }} />
             <div className="p-6 space-y-4">
-              <h4 className="font-bold text-lg text-emerald-600">ROBOTICS :</h4>
+              <h4 className="font-bold text-lg" style={{ color: HEX }}>ROBOTICS :</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 เรียนรู้ส่วนประกอบและระบบการทำงานของหุ่นยนต์ รวมถึงการเขียนโปรแกรมควบคุมอุปกรณ์ต่าง ๆ
                 ของหุ่นยนต์ ฝึกการควบคุมหุ่นยนต์เพื่อทำกิจกรรมต่าง ๆ
@@ -184,7 +187,7 @@ export default function JuniorsCoursePage() {
                     "ชุดอุปกรณ์อื่น ๆ อีกมากมาย",
                   ].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}

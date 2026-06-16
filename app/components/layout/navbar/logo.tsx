@@ -17,7 +17,7 @@ export const LogoEs = () => {
         className="object-contain"
         style={{
           width: "auto",
-          height: "clamp(40px, 10vw, 70px)", // Responsive height: 40px on mobile, max 70px on desktop
+          height: "clamp(30px, 7vw, 52px)",
         }}
       />
     </button>

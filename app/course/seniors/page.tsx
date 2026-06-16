@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
+const HEX = "#e08754";
+
 export default function SeniorsCoursePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -11,7 +13,8 @@ export default function SeniorsCoursePage() {
       <div className="max-w-5xl mx-auto px-4 pt-8">
         <Link href="/#courses">
           <motion.span
-            className="inline-flex items-center gap-1 text-orange-500 font-semibold text-sm cursor-pointer hover:underline"
+            style={{ color: HEX }}
+            className="inline-flex items-center gap-1 font-semibold text-sm cursor-pointer hover:underline"
             whileHover={{ x: -3 }}
             transition={{ duration: 0.2 }}
           >
@@ -31,9 +34,9 @@ export default function SeniorsCoursePage() {
           CODING & ROBOTICS COURSE
         </h1>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mt-1">
-          <span className="text-orange-500">SENIOR</span> : Ages 12+
+          <span style={{ color: HEX }}>SENIOR</span> : Ages 12+
         </h2>
-        <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-orange-500" />
+        <div className="mt-4 mx-auto w-16 h-1 rounded-full" style={{ backgroundColor: HEX }} />
       </motion.div>
 
       {/* Description */}
@@ -48,7 +51,7 @@ export default function SeniorsCoursePage() {
           โดยไม่จำเป็นต้องมีพื้นฐานมาก่อน
         </p>
         <p className="italic font-semibold text-gray-700 dark:text-gray-200">
-           เรียนสนุก เข้าใจง่าย ได้ประสบการณ์ เน้นการลงมือทำ ทดลอง และแก้ไขปัญหาด้วยตัวเอง 
+           เรียนสนุก เข้าใจง่าย ได้ประสบการณ์ เน้นการลงมือทำ ทดลอง และแก้ไขปัญหาด้วยตัวเอง
         </p>
         <p>
           การเขียน Code อาจจะไม่สำเร็จในครั้งแรกที่เริ่มเขียน
@@ -87,7 +90,7 @@ export default function SeniorsCoursePage() {
           การเรียนรู้ของน้อง ๆ จะแบ่งเป็น 2 ส่วนหลัก
         </motion.h3>
         <div className="flex justify-center mb-10">
-          <div className="w-16 h-1 rounded-full bg-orange-500" />
+          <div className="w-16 h-1 rounded-full" style={{ backgroundColor: HEX }} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,9 +102,9 @@ export default function SeniorsCoursePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="h-1.5 w-full bg-orange-500" />
+            <div className="h-1.5 w-full" style={{ backgroundColor: HEX }} />
             <div className="p-6 space-y-4">
-              <h4 className="font-bold text-lg text-orange-500">ADVANCED CODING :</h4>
+              <h4 className="font-bold text-lg" style={{ color: HEX }}>ADVANCED CODING :</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 เรียนรู้การเขียนโปรแกรมคอมพิวเตอร์ด้วยภาษาขั้นสูง เรียนรู้ตั้งแต่พื้นฐานถึงการสร้างผลงาน
                 โครงงาน หรือประดิษฐ์หุ่นยนต์ และสามารถทำได้จริง
@@ -114,7 +117,7 @@ export default function SeniorsCoursePage() {
                 <ul className="space-y-1">
                   {["Python", "C/C++", "Linux", "HTML", "Swift"].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}
@@ -133,7 +136,7 @@ export default function SeniorsCoursePage() {
                     "Engineering Design",
                   ].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}
@@ -150,9 +153,9 @@ export default function SeniorsCoursePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="h-1.5 w-full bg-orange-500" />
+            <div className="h-1.5 w-full" style={{ backgroundColor: HEX }} />
             <div className="p-6 space-y-4">
-              <h4 className="font-bold text-lg text-orange-500">ADVANCED ROBOTICS :</h4>
+              <h4 className="font-bold text-lg" style={{ color: HEX }}>ADVANCED ROBOTICS :</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 เรียนรู้ส่วนประกอบและระบบการทำงานของหุ่นยนต์
                 รวมถึงการเขียนโปรแกรมควบคุมอุปกรณ์ต่าง ๆ ของหุ่นยนต์
@@ -178,7 +181,7 @@ export default function SeniorsCoursePage() {
                     "ชุดอุปกรณ์อื่น ๆ อีกมากมาย",
                   ].map((item) => (
                     <li key={item} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: HEX }} />
                       {item}
                     </li>
                   ))}
