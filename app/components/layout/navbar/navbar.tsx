@@ -46,6 +46,15 @@ export const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
   // ตรวจสอบ active item จาก path
   useEffect(() => {
     if (pathname === "/moments-and-achievements") {
@@ -309,14 +318,14 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-hidden"
+            className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto max-h-[calc(100vh-5rem)]"
             style={{ transformOrigin: "top center" }}
             variants={dropdownVariants}
             initial="hidden"
             animate="show"
             exit="exit"
           >
-            <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl px-4 sm:px-6 lg:px-8 pb-8">
               {menuItems.map((item, index) => (
                 <motion.div key={item.name} custom={index} variants={menuItemVariants} initial="hidden" animate="show">
                   {item.name === "Courses" ? (

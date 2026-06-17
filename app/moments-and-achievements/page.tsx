@@ -195,22 +195,18 @@ const galleryData: GalleryDataType = {
   rewards: sortRewardsByDate(Reward_data),
   events: [
     {
-      id: 101,
-      title: "REAI Showcase – Robotics Engineering & AI",
-      thumbnail: "/pictures/moment-and-reward/activities/reai-showcase.jpg",
-      text: "EasyKids Robotics ร่วมงาน REAI Showcase คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ ชมผลงานหุ่นยนต์และ AI ฝีมือนักศึกษาปี 4 พร้อมรับการประเมินจากภาคอุตสาหกรรมกว่า 40 หน่วยงาน",
-      date: "6 มีนาคม 2569",
-      location: "SMC Hall 2 คณะวิศวกรรมศาสตร์ มช.",
-      images: ["/pictures/moment-and-reward/activities/reai-showcase.jpg"],
-    },
-    {
-      id: 102,
-      title: "EasyKids RingMaster Challenge @ MRC 2026",
-      thumbnail: "/pictures/moment-and-reward/activities/ringmaster-challenge.jpg",
-      text: "การแข่งขันหุ่นยนต์ EasyKids RingMaster Challenge รวมเยาวชนจากหลากหลายสถาบัน ประชันทักษะการเขียนโปรแกรม การออกแบบกลไก และการควบคุมหุ่นยนต์เพื่อพิชิตภารกิจ Ring",
-      date: "2026",
-      location: "",
-      images: ["/pictures/moment-and-reward/activities/ringmaster-challenge.jpg"],
+      id: 104,
+      title: "TKB SMT Techno Robotics & Coding",
+      thumbnail: "/pictures/moment-and-reward/activities/โรงเรียนธีรกานท์บ้านโฮ่ง จังหวัดลำพูน.jpg",
+      text: "เด็กๆ ได้ลงมือเรียนรู้ผ่านการสร้างหุ่นยนต์ การเขียนโปรแกรม และการควบคุมหุ่นยนต์เพื่อทำภารกิจ รวมถึงการแก้ปัญหาจริงกับ 3in1 EasyKids Robot Kit ตั้งแต่พื้นฐานการทำงานของหุ่นยนต์ การเชื่อมต่ออุปกรณ์ ไปจนถึงการคิดวิเคราะห์และทำงานเป็นทีม",
+      date: "14 มิถุนายน 2569",
+      location: "โรงเรียนธีรกานท์บ้านโฮ่ง จังหวัดลำพูน",
+      images: ["/pictures/moment-and-reward/activities/โรงเรียนธีรกานท์บ้านโฮ่ง จังหวัดลำพูน.jpg"],
+      subActivities: [
+        { id: 1, title: "การสร้างหุ่นยนต์", images: [] },
+        { id: 2, title: "การเขียนโปรแกรม", images: [] },
+        { id: 3, title: "การควบคุมหุ่นยนต์เพื่อทำภารกิจ", images: [] },
+      ],
     },
     {
       id: 103,
@@ -220,6 +216,24 @@ const galleryData: GalleryDataType = {
       date: "9 มิถุนายน 2569",
       location: "โรงเรียนดอยเต่าวิทยาคม จ.เชียงใหม่",
       images: ["/pictures/moment-and-reward/activities/drone-workshop.jpg"],
+    },
+    {
+      id: 102,
+      title: "EasyKids RingMaster Challenge @ MRC 2026",
+      thumbnail: "/pictures/moment-and-reward/activities/ringmaster-challenge.jpg",
+      text: "การแข่งขันหุ่นยนต์ EasyKids RingMaster Challenge รวมเยาวชนจากหลากหลายสถาบัน ประชันทักษะการเขียนโปรแกรม การออกแบบกลไก และการควบคุมหุ่นยนต์เพื่อพิชิตภารกิจ Ring",
+      date: "26 พฤษภาคม 2569",
+      location: "",
+      images: ["/pictures/moment-and-reward/activities/ringmaster-challenge.jpg"],
+    },
+    {
+      id: 101,
+      title: "REAI Showcase – Robotics Engineering & AI",
+      thumbnail: "/pictures/moment-and-reward/activities/reai-showcase.jpg",
+      text: "EasyKids Robotics ร่วมงาน REAI Showcase คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ ชมผลงานหุ่นยนต์และ AI ฝีมือนักศึกษาปี 4 พร้อมรับการประเมินจากภาคอุตสาหกรรมกว่า 40 หน่วยงาน",
+      date: "6 มีนาคม 2569",
+      location: "SMC Hall 2 คณะวิศวกรรมศาสตร์ มช.",
+      images: ["/pictures/moment-and-reward/activities/reai-showcase.jpg"],
     },
   ],
 };
@@ -247,6 +261,15 @@ function MomentsContent() {
   const [isExiting, setIsExiting] = useState(false);
   const [visibleRewardsCount, setVisibleRewardsCount] = useState(6);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isMobileOpen]);
 
   const handleBack = async () => {
     if (isExiting) return;
@@ -333,13 +356,13 @@ function MomentsContent() {
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
-              className="md:hidden bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-hidden"
+              className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto max-h-[calc(100vh-5rem)]"
               style={{ transformOrigin: "top center" }}
-              initial={{ opacity: 0, height: 0, scaleY: 0.95 }}
-              animate={{ opacity: 1, height: "auto", scaleY: 1, transition: { duration: 0.3, ease: "easeOut" } }}
-              exit={{ opacity: 0, height: 0, scaleY: 0.95, transition: { duration: 0.25, ease: "easeIn" } }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto", transition: { duration: 0.3, ease: "easeOut" } }}
+              exit={{ opacity: 0, height: 0, transition: { duration: 0.25, ease: "easeIn" } }}
             >
-              <div className="px-4 sm:px-6 lg:px-8">
+              <div className="px-4 sm:px-6 lg:px-8 pb-8">
                 {([
                   { key: "class",   en: "Class",     th: "คลาส",         hex: "#c87df5" },
                   { key: "robot",   en: "Robots",       th: "หุ่นยนต์",      hex: "#878cf6" },
