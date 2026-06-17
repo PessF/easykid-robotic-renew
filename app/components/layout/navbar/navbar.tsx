@@ -48,11 +48,11 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => { document.documentElement.style.overflow = ""; };
   }, [isOpen]);
 
   // ตรวจสอบ active item จาก path
@@ -143,13 +143,13 @@ export const Navbar = () => {
   ];
 
   const dropdownVariants: Variants = {
-    hidden: { opacity: 0, height: 0, scaleY: 0.95 },
+    hidden: { opacity: 0, height: 0 },
     show: {
-      opacity: 1, height: "auto", scaleY: 1,
+      opacity: 1, height: "auto",
       transition: { duration: 0.3, ease: "easeOut", opacity: { duration: 0.2 }, height: { duration: 0.3 } },
     },
     exit: {
-      opacity: 0, height: 0, scaleY: 0.95,
+      opacity: 0, height: 0,
       transition: { duration: 0.25, ease: "easeIn", opacity: { duration: 0.15 }, height: { duration: 0.2 } },
     },
   };
