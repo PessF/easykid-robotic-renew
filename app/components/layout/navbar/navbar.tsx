@@ -46,14 +46,6 @@ export const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (isOpen) {
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = "";
-    }
-    return () => { document.documentElement.style.overflow = ""; };
-  }, [isOpen]);
 
   // ตรวจสอบ active item จาก path
   useEffect(() => {
@@ -318,8 +310,7 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto max-h-[calc(100vh-5rem)]"
-            style={{ transformOrigin: "top center" }}
+            className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto overscroll-contain max-h-[calc(100vh-5rem)]"
             variants={dropdownVariants}
             initial="hidden"
             animate="show"

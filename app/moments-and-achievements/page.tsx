@@ -262,14 +262,6 @@ function MomentsContent() {
   const [visibleRewardsCount, setVisibleRewardsCount] = useState(6);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  useEffect(() => {
-    if (isMobileOpen) {
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = "";
-    }
-    return () => { document.documentElement.style.overflow = ""; };
-  }, [isMobileOpen]);
 
   const handleBack = async () => {
     if (isExiting) return;
@@ -356,8 +348,7 @@ function MomentsContent() {
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
-              className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto max-h-[calc(100vh-5rem)]"
-              style={{ transformOrigin: "top center" }}
+              className="md:hidden bg-black/90 backdrop-blur-md border-b border-white/10 shadow-lg absolute top-full left-0 right-0 overflow-y-auto overscroll-contain max-h-[calc(100vh-5rem)]"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto", transition: { duration: 0.3, ease: "easeOut" } }}
               exit={{ opacity: 0, height: 0, transition: { duration: 0.25, ease: "easeIn" } }}
