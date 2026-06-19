@@ -62,7 +62,7 @@ export const Hero = () => {
           preload="metadata"
           className="w-full h-full object-cover"
         >
-          <source src="/videos/ek-videohero.mp4" type="video/mp4" />
+          <source src="/videos/ek-videonologohero1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
